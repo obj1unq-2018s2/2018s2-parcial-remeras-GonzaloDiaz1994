@@ -1,0 +1,131 @@
+import remeras.*
+import pedidosYSucursales.*
+import comercio.*
+
+describe "test"{
+	const lisa = new RemeraLisa(
+		talle = 40,
+		color = "gris"
+	)
+	const lisa2 = new RemeraLisa(
+		talle = 42,
+		color = "gris"
+	)
+	const bordadita = new RemeraBordada(
+		talle = 44,
+		color = "blanco",
+		cantColores = 1
+	)
+	const bordadita2 = new RemeraBordada(
+		talle = 44,
+		color = "blanco",
+		cantColores = 4
+	)
+	const disney = new Empresa(
+		derechoDeAutor = 100,
+		tieneConvenio = true
+	)
+	
+	const sublimadaFrozen = new RemeraSublimada(
+		talle = 42,
+		color = "gris",
+		duenioDelDibujo = disney,
+		alto = 10,
+		ancho = 15
+	)
+	
+	const flores = new Sucursal(
+		cantidadMinima = 10
+	)
+	const avellaneda = new Sucursal(
+		cantidadMinima = 3
+	)
+	
+	const pedido1 = new Pedido(
+		modeloDeRemera = lisa2,
+		cantidadDeRemeras = 5,
+		sucursal = flores
+	)
+	const pedido2 = new Pedido(
+		modeloDeRemera = lisa2,
+		cantidadDeRemeras = 5,
+		sucursal = avellaneda
+	)
+	
+	const pepona = new Comercio()
+	
+	test "remera lisa"{
+		assert.equals(80, lisa.costo())
+		assert.equals(100, lisa2.costo())
+		lisa.color("verde")
+		lisa2.color("verde")
+		assert.equals(88, lisa.costo())
+		assert.equals(110, lisa2.costo())
+	}
+	
+	test "remera bordada"{
+		assert.equals(120, bordadita.costo())
+		assert.equals(140, bordadita2.costo())
+	}
+	
+	test "remera sublimada"{
+		assert.equals(275, sublimadaFrozen.costo())
+	}
+	
+	test "test pedido en flores da 500, no tiene descuento"{
+		assert.equals(500, pedido1.precio())
+	}
+	
+	test "pedido en avellaneda da 450"{
+		assert.equals(450, pedido2.precio())
+	}
+	test "registar pedido a comercio"{
+		pepona.registrarPedido(pedido1)
+		assert.equals([pedido1,pepona.pedidos()])
+	}
+	test "total facturado por el comercio"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals(950, pepona.totalFacturado())
+	}
+	test "total facturado por la sucursal flores"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals(500, pepona.totalFacturadoDeSucursal(flores))
+	}
+	test "cantidad de pedidos de remera de color gris"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals(2, pepona.cantPedidosPorColor("gris"))
+	}
+	test " pedido mas caro es flores"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals(pedido1, pepona.pedidoMasCaro())
+	}
+	
+	test"talles pedidos"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals([42], pepona.tallesPedidos())
+	}
+	test "talles no pedido"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals([32,33,34,35,36,37,38,39,41,43,44,45,46,47,48], pepona.tallesNoPedidos())
+	}
+	
+	
+	test "sucursal que mas facturo es flores"{
+		pepona.registrarPedido(pedido1)
+		pepona.registrarPedido(pedido2)
+		assert.equals(flores, pepona.sucursalQueMasFacturo())
+		
+		
+	}
+	
+	
+	
+	
+	
+}
