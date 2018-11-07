@@ -19,13 +19,14 @@ class Comercio{
 		pedido => pedido.precio()
 	}
 	
-	method tallesPedidos() = pedidos.map{pedido => pedido.modeloDeRemera().talle()}.withoutDuplicates()
+	method tallesPedidos() = pedidos.map{pedido => pedido.modeloDeRemera().talle()}.asSet()
 	
  	method tallesNoPedidos(){
  		var talles = new Range(32, 48)
- 		talles.asList() + self.tallesPedidos()
- 		return talles.asList().withoutDuplicates()
- 	}
+ 		talles = talles.asList().asSet().difference(self.tallesPedidos())
+ 		return talles
+ 	
+		}
 	
 	method sucursalQueMasFacturo() = pedidos.max{
 		pedido => self.totalFacturadoDeSucursal(pedido.sucursal())

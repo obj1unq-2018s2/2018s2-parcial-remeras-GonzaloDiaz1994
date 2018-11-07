@@ -107,12 +107,12 @@ describe "test"{
 	test"talles pedidos"{
 		pepona.registrarPedido(pedido1)
 		pepona.registrarPedido(pedido2)
-		assert.equals([42], pepona.tallesPedidos())
+		assert.equals(#{42}, pepona.tallesPedidos())
 	}
 	test "talles no pedido"{
 		pepona.registrarPedido(pedido1)
 		pepona.registrarPedido(pedido2)
-		assert.equals([32,33,34,35,36,37,38,39,41,43,44,45,46,47,48], pepona.tallesNoPedidos())
+		assert.equals(#{32,33,34,35,36,37,38,39,40,41,43,44,45,46,47,48}, pepona.tallesNoPedidos())
 	}
 	
 	
