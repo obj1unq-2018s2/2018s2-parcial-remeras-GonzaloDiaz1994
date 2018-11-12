@@ -7,6 +7,8 @@ class Pedido{
 
 	method precioBase() = modeloDeRemera.costo() * cantidadDeRemeras
 	
+	// Aca se deberia ser >= o cuando igalas la cantidad de remeras minimas
+	// no se aplica el descuento.
 	method hayDescuento() = cantidadDeRemeras > sucursal.cantidadMinima()
 	
 	method descuento() = self.precioBase() * modeloDeRemera.porcentajeDescuento() /100
@@ -21,6 +23,7 @@ class Pedido{
 	
 }
 
+// Hubiese estado mejor que los pedidos estuvieran aqui.
 class Sucursal{
 	const property cantidadMinima
 

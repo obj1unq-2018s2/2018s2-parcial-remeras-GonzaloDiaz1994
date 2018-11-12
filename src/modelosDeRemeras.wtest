@@ -79,9 +79,12 @@ describe "test"{
 	test "pedido en avellaneda da 450"{
 		assert.equals(450, pedido2.precio())
 	}
+	
+	// Correccion: El assert aca se te escapo la sintaxis
 	test "registar pedido a comercio"{
 		pepona.registrarPedido(pedido1)
-		assert.equals([pedido1,pepona.pedidos()])
+//		assert.equals([pedido1,pepona.pedidos()])
+		assert.equals(pedido1,pepona.pedidos())
 	}
 	test "total facturado por el comercio"{
 		pepona.registrarPedido(pedido1)

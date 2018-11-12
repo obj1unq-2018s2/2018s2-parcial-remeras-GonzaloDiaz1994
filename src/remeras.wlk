@@ -5,6 +5,12 @@ class RemeraLisa{
 	
 	method esColorBasico() = coloresBasicos.contains(color)
 	
+	// Esto se puede mejorar, se pueden evitar los if-else anidados,
+	// pero esta bien.
+	// El problema que te va a dar si querias hacer el bonus es que
+	// calculas el coste extra de estas valores diciendolos explicitamente
+	// osea, retornas 88 y 110, si los valores cambiaran, no podrias dejarlo
+	// asi.
 	method costo(){
 		if(talle.between(32, 40) and self.esColorBasico() ){
 			return 80
@@ -55,6 +61,7 @@ class RemeraSublimada inherits RemeraLisa{
 	}
 }
 
+// Buena onda que creaste la clase empresa.
 class Empresa{
 	const property derechoDeAutor // numero
 	const property tieneConvenio // booleano

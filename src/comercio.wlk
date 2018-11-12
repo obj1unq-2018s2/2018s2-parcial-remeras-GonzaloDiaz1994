@@ -1,8 +1,13 @@
 import pedidosYSucursales.*
 
+// Hubiera estado bueno que los pedidos hubiesen estado en la clase
+// Sucursal.
+// Aplicas bien Colecciones, pero te quedo un toque mas facil con 
+// Pedidos aca. Pero NO es nada grave.
 class Comercio{
 	var property pedidos = []
 	
+	// Pasaria esta parte a sucursal.
 	method registrarPedido(pedido){
 		pedidos.add(pedido)
 	}
@@ -11,6 +16,7 @@ class Comercio{
 	method totalFacturadoDeSucursal(sucursalDada) = pedidos.filter{
 		pedido => pedido.sucursal() == sucursalDada}.sum{pedido => pedido.precio() } 
 
+// Esto podria hacerse con el mensaje de colecciones count.
 	method cantPedidosPorColor(color) = pedidos.filter{
 		pedido => pedido.modeloDeRemera().color() == color
 	}.size()
